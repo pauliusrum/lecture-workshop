@@ -1,0 +1,15 @@
+{
+    "name": "paulius-nfq/lecture-functionality",
+    "authors": [
+        {
+            "name": "Paulius Ruminas",
+            "email": "paulius.ruminas@nfq.lt"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "": "src/"
+        }
+    }
+}
