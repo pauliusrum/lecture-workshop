@@ -44,3 +44,8 @@ $argumentParser = new ArgumentParser($argv);
 $generatedReportsDir = __DIR__ . '/../../out/';
 
 // Your code goes here...
+
+$flightsByAircraft = [];
+foreach ($flights as $flight) {
+    $flightsByAircraft[$flight->getAircraftId()][] = $flight;
+}
