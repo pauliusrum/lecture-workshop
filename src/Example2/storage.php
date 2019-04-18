@@ -18,7 +18,7 @@ use Util\FileStorage;
  *
  *    $fuelStorages = $fileStorage->load(FuelStorage::class);
  *
- *    NOTE: if nothing was saved an empty array will be returned.
+ *    NOTE: if nothing was stored an empty array will be returned.
  */
 $fileStorage = new FileStorage($outDir);
 
