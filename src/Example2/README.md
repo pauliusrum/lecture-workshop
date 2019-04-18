@@ -1,9 +1,6 @@
-# AS IS
+# Tasks
 
-* Tracks fuel changes in fuel storages.
-
-# TO BE
-
-* Show fuel amount in litres.
-* Show individual fillings for any given storage.
-* Ability to see fuel storage amount at any given date.
+* Ability to see the current amount of fuel in the given storage.  
+  Storages should be configurable from a file. The configuration file should contain storage **name** and **capacity** e.g.:  
+  `php storage.php STORAGE_NAME` should print `STORAGE_NAME: 500l / 10000l`.  
+  Assuming that 500l are filled into the storage of 10000l capacity.
