@@ -34,5 +34,4 @@ $flights = [
 $generatedReportsDir = __DIR__ . '/../../out/';
 
 // To get console arguments use: $argv (https://www.php.net/manual/en/reserved.variables.argv.php)
-
 // Your code goes here...
