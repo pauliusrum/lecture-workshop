@@ -6,14 +6,19 @@ use Util\FileStorage;
 /**
  * Storing objects into a file.
  *
- * To save objects into a file run:
+ * *) To save objects into a file run:
  *
- *      $fileStorage->save(Example::class, $arrayOfObjects);
+ *    $fuelStorages = [];
+ *    $fileStorage->save(FuelStorage::class, $fuelStorages);
+ *
+ *    NOTE: will override anything that was stored before.
  *
  *
- * To load objects from file run:
+ * *) To load objects from file run:
  *
- *      $fileStorage->load(Example::class);
+ *    $fuelStorages = $fileStorage->load(FuelStorage::class);
+ *
+ *    NOTE: if nothing was saved an empty array will be returned.
  */
 $fileStorage = new FileStorage($outDir);
 
