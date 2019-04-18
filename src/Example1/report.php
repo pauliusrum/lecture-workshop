@@ -44,3 +44,22 @@ $argumentParser = new ArgumentParser($argv);
 $generatedReportsDir = __DIR__ . '/../../out/';
 
 // Your code goes here...
+
+$print = [];
+echo "<ul>\r\n";
+foreach($aircrafts as $aircraft){
+    echo "<li>";
+    echo $aircraft->getIataCode() . "\r\n";
+    echo "<ul>";
+    foreach($flights as $flight){
+        echo "<li>";
+        echo $flight->getFlightNumber();
+        echo "@ " . $flight->getScheduledDate()->format('Y-m-d H:i:s'). "\r\n";
+        echo "</li>\r\n";
+    }
+    echo "</ul>\r\n";
+    echo "</li>\r\n";
+}
+echo "</ul>";
+
+//var_dump($aircrafts);
