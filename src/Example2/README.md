@@ -1,7 +1,8 @@
+# Introduction
+
+The operations manager wants to keep track of the fuel levels in any given storage.
+
 # Tasks
 
-* Ability to see the current amount of fuel in the given storage.  
-  Storages should be configurable from a file. The configuration file should contain storage **id**, **name** and **capacity** e.g.:  
-  `php storage.php name=${STORAGE_ID}` should print `${STORAGE_NAME}: 500l / 10000l`.  
-  
-  > Assuming that 500l are filled into the storage of 10000l capacity.
+* Storages should be created from a file. The configuration file should contain: **id**, **name** and **capacity**. e.g.:
+  `php storage.php configFile="${CONFIG_FILE_PATH}"` should create storages declared in the configuration file.

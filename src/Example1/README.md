@@ -1,3 +1,7 @@
+# Introduction
+
+The dispatcher needs to track what aircrafts are used for which flight.
+
 # Tasks
 * Generate report file of flights grouped by aircraft in `HTML` format e.g.:
 ```html
