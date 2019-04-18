@@ -1,12 +1,14 @@
 {
-    "name": "paulius-nfq/lecture-functionality",
+    "name": "paulius-nfq/lecture-workshop",
     "authors": [
         {
             "name": "Paulius Ruminas",
             "email": "paulius.ruminas@nfq.lt"
         }
     ],
-    "require": {},
+    "require": {
+        "php": ">=7.3"
+    },
     "autoload": {
         "psr-4": {
             "": "src/"
