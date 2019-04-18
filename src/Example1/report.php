@@ -3,6 +3,7 @@ require_once __DIR__ . '/../bootstrap.php';
 
 use Example1\Entity\Aircraft;
 use Example1\Entity\Flight;
+use Util\ArgumentParser;
 
 /**
  * Aircraft(
@@ -31,7 +32,15 @@ $flights = [
     new Flight(5, 'Z520', new DateTime('2019-01-03 10:30:00'), $aircrafts['L2T']->getId()),
 ];
 
+/**
+ * Command: php report.php date="2018-01-01"
+ *
+ * *) To parse the date run:
+ *
+ *    $date = $argumentParser->parseDateTime('date', 'Y-m-d');
+ */
+$argumentParser = new ArgumentParser($argv);
+
 $generatedReportsDir = __DIR__ . '/../../out/';
 
-// To get console arguments use: $argv (https://www.php.net/manual/en/reserved.variables.argv.php)
 // Your code goes here...

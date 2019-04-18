@@ -1,6 +1,7 @@
 <?php declare(strict_types=1);
 require_once __DIR__ . '/../bootstrap.php';
 
+use Util\ArgumentParser;
 use Util\FileStorage;
 
 /**
@@ -13,7 +14,6 @@ use Util\FileStorage;
  *
  *    NOTE: will override anything that was stored before.
  *
- *
  * *) To load objects from file run:
  *
  *    $fuelStorages = $fileStorage->load(FuelStorage::class);
@@ -22,5 +22,21 @@ use Util\FileStorage;
  */
 $fileStorage = new FileStorage($outDir);
 
-// To get console arguments use: $argv (https://www.php.net/manual/en/reserved.variables.argv.php)
+/**
+ * Command: php storage.php name="Storage name" date="2018-01-01" amount=100
+ *
+ * *) To parse the name run:
+ *
+ *    $name = $argumentParser->parseString('name')
+ *
+ * *) To parse the date run:
+ *
+ *    $date = $argumentParser->parseDateTime('date', 'Y-m-d');
+ *
+ * *) To parse the int run:
+ *
+ *    $amount = $argumentParser->parseDateTime('amount');
+ */
+$argumentParser = new ArgumentParser($argv);
+
 // Your code goes here...
