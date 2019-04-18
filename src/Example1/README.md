@@ -1,9 +1,22 @@
-# AS IS
-
-* Generates report file in `HTML` format for flights in the given date range grouped by aircraft type.
-
-# TO BE
-
-* Generate the same report in `JSON` format.
-* Allow to print the report to the screen.
-* Allow to generate the report only for given aircraft types.
+# Tasks
+* Generate report file of flights grouped by aircraft in `HTML` format e.g.:
+```html
+<html>
+<body>
+<h3>Flights by aircraft</h3>
+<ul>
+    <li>L2T
+        <ul>
+            <li>X230 @ 2019-01-02 02:45:00</li>
+            <li>E780 @ 2019-01-02 16:10:00</li>
+        </ul>
+    </li>
+    <li>A40
+        <ul>
+            <li>Y560 @ 2019-01-02 12:00:00</li>
+        </ul>
+    </li>
+</ul>
+</body>
+</html>
+```

@@ -2,7 +2,7 @@
 
 namespace Example1\Entity;
 
-use DateTimeInterface;
+use DateTime;
 
 class Flight
 {
@@ -12,13 +12,13 @@ class Flight
     /** @var string */
     private $flightNumber;
 
-    /** @var DateTimeInterface */
+    /** @var DateTime */
     private $scheduledDate;
 
     /** @var int */
     private $aircraftId;
 
-    public function __construct(int $id, string $flightNumber, DateTimeInterface $scheduledDate, int $aircraftId)
+    public function __construct(int $id, string $flightNumber, DateTime $scheduledDate, int $aircraftId)
     {
         $this->id = $id;
         $this->flightNumber = $flightNumber;
@@ -36,7 +36,7 @@ class Flight
         return $this->flightNumber;
     }
 
-    public function getScheduledDate(): DateTimeInterface
+    public function getScheduledDate(): DateTime
     {
         return $this->scheduledDate;
     }

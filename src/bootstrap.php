@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-require_once __DIR__ . '/../vendor/autoload.php';
+(static function () {
+    require_once __DIR__ . '/../vendor/autoload.php';
 
-function createOutputDir(string $rootDir)
-{
-    $normalized = rtrim($rootDir, '/') . '/out';
-    /** @noinspection MkdirRaceConditionInspection */
-    !file_exists($normalized) && mkdir($normalized);
-}
+    $outDir = __DIR__ . '/../out/';
+
+    // Creates out directory for generated files
+    !file_exists($outDir) && !mkdir($outDir) && !is_dir($outDir);
+})();
