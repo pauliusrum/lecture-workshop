@@ -45,25 +45,21 @@ $generatedReportsDir = __DIR__ . '/../../out/';
 
 // Your code goes here...
 
-$html = '';
-$html .= "<ul>\r\n";
+$data = [];
+
 /** @var Aircraft $aircraft */
 foreach($aircrafts as $aircraft){
-    $html .= "<li>";
-    $html .= $aircraft->getIataCode() . "\r\n";
-    $html .= "<ul>";
+    $temp = [];
+    $temp['aircfaft'] = $aircraft;
+    $temp['flights'] = [];
     /** @var Flight $flight */
     foreach($flights as $flight){
         if($flight->getAircraftId() === $aircraft->getId()) {
-            $html .= "<li>";
-            $html .= $flight->getFlightNumber();
-            $html .= "@ " . $flight->getScheduledDate()->format('Y-m-d H:i:s') . "\r\n";
-            $html .= "</li>\r\n";
+            $temp['flights'][] = $flight;
         }
     }
-    $html .= "</ul>\r\n";
-    $html .= "</li>\r\n";
+    $data[] = $temp;
 }
-$html .= "</ul>";
+
 
 file_put_contents($generatedReportsDir."example1.html", $html);
