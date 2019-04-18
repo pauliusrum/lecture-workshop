@@ -52,6 +52,7 @@ foreach($aircrafts as $aircraft){
     $temp = [];
     $temp['aircfaft'] = $aircraft;
     $temp['flights'] = [];
+
     /** @var Flight $flight */
     foreach($flights as $flight){
         if($flight->getAircraftId() === $aircraft->getId()) {
@@ -61,5 +62,25 @@ foreach($aircrafts as $aircraft){
     $data[] = $temp;
 }
 
+$html = '<html>
+<body>
+<h3>Flights by aircraft</h3>
+<ul>';
+
+foreach ($data as $datum) {
+    $html .= '<li>';
+    /** @var Aircraft $datum['aircfaft'] */
+    $html .= $datum['aircfaft']->getIataCode();
+    if(!empty($datum['flights'])) {
+        $html .= '<ul>';
+        /** @var Flight $flight */
+        foreach ($datum['flights'] as $flight) {
+            $html .= '<li>' . $flight->getFlightNumber().' @ ' .$flight->getScheduledDate()->format('Y-m-d H:i:s').'</li>';
+        }
+        $html .= '</ul>';
+    }
+    $html .= '</li>';
+}
+$html .= '</ul></html>';
 
 file_put_contents($generatedReportsDir."example1.html", $html);
