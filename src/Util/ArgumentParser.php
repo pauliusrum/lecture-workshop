@@ -20,7 +20,7 @@ class ArgumentParser
 
     public static function parseInt(string $value): int
     {
-        if (!ctype_digit($value)) {
+        if (!filter_var($value, FILTER_VALIDATE_INT)) {
             throw new RuntimeException("Invalid integer: $value.");
         }
 
