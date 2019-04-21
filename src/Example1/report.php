@@ -3,7 +3,12 @@ require_once __DIR__ . '/../bootstrap.php';
 
 use Example1\Entity\Aircraft;
 use Example1\Entity\Flight;
+use Example1\Reporting\FlightReportAggregator;
+use Example1\Reporting\FlightReportFilter;
+use Example1\Reporting\HtmlFlightReportGenerator;
+use Example1\Reporting\JsonFlightReportGenerator;
 use Util\ArgumentParser;
+use Util\ShutdownHandler;
 
 /**
  * Aircraft(
@@ -32,15 +37,69 @@ $flights = [
     new Flight(5, 'Z520', new DateTime('2019-01-03 10:30:00'), $aircrafts['L2T']->getId()),
 ];
 
-/**
- * Command: php report.php date="2018-01-01"
- *
- * *) To parse the date run:
- *
- *    $date = $argumentParser->parseDateTime('date', 'Y-m-d');
- */
 $argumentParser = new ArgumentParser($argv);
+$shutdownHandler = new ShutdownHandler();
+$htmlReportGenerator = new HtmlFlightReportGenerator();
+$jsonReportGenerator = new JsonFlightReportGenerator();
+$flightReportAggregator = new FlightReportAggregator();
+$flightReportFilter = new FlightReportFilter();
 
 $generatedReportsDir = __DIR__ . '/../../out/';
 
-// Your code goes here...
+// Aggregate data for report.
+$reportData = $flightReportAggregator->groupByAircrafts($aircrafts, $flights);
+
+// Filter by given aircraft iata code.
+$aircraft = $argumentParser->parseString('aircraft');
+if ($aircraft !== null) {
+    $reportData = $flightReportFilter->filterByAircraftIataCode($aircraft, $reportData);
+}
+
+// Filter by given date range.
+/** @var DateTime $from */
+$from = $shutdownHandler->exitIfRuntimeErrorOccurs(static function () use ($argumentParser): DateTime {
+    $date = $argumentParser->parseDateTime('from', 'Y-m-d');
+    if ($date !== null) {
+        $date->setTime(0, 0);
+    }
+
+    return $date;
+});
+
+/** @var DateTime $to */
+$to = $shutdownHandler->exitIfRuntimeErrorOccurs(static function () use ($argumentParser): DateTime {
+    $date = $argumentParser->parseDateTime('to', 'Y-m-d');
+    if ($date !== null) {
+        $date->setTime(0, 0);
+    }
+
+    return $date;
+});
+
+$reportData = $flightReportFilter->filterByDate($from, $to, $reportData);
+
+// Generate report by the given format. Defaults to json.
+$reportFormat = $argumentParser->parseString('format') ?? 'json';
+switch ($reportFormat) {
+    case 'html':
+        $reportContents = $htmlReportGenerator->generate($reportData);
+        break;
+    case 'json':
+        $reportContents = $jsonReportGenerator->generate($reportData);
+        break;
+    default:
+        $shutdownHandler->exitWithError("Format '$reportFormat' is not supported. Available formats: json, html.", 1);
+}
+
+// Print report to the given output. Defaults to screen.
+$reportOutput = $argumentParser->parseString('output') ?? 'screen';
+switch ($reportOutput) {
+    case 'screen':
+        echo $reportContents;
+        break;
+    case 'file':
+        file_put_contents("${generatedReportsDir}report.$reportFormat", $reportContents);
+        break;
+    default:
+        $shutdownHandler->exitWithError("Output '$reportOutput' is not supported. Available outputs: screen, file.", 2);
+}
