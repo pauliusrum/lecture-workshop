@@ -20,4 +20,10 @@ class ShutdownHandler
         echo "[ERROR] $message";
         exit($code);
     }
+
+    public function exitWithMessage(string $message): void
+    {
+        echo $message;
+        exit;
+    }
 }

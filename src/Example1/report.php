@@ -57,7 +57,7 @@ if ($aircraft !== null) {
 
 // Filter by given date range.
 /** @var DateTime $from */
-$from = $shutdownHandler->exitIfRuntimeErrorOccurs(static function () use ($argumentParser): DateTime {
+$from = $shutdownHandler->exitIfRuntimeErrorOccurs(static function () use ($argumentParser): ?DateTime {
     $date = $argumentParser->parseDateTime('from', 'Y-m-d');
     if ($date !== null) {
         $date->setTime(0, 0);
@@ -67,7 +67,7 @@ $from = $shutdownHandler->exitIfRuntimeErrorOccurs(static function () use ($argu
 });
 
 /** @var DateTime $to */
-$to = $shutdownHandler->exitIfRuntimeErrorOccurs(static function () use ($argumentParser): DateTime {
+$to = $shutdownHandler->exitIfRuntimeErrorOccurs(static function () use ($argumentParser): ?DateTime {
     $date = $argumentParser->parseDateTime('to', 'Y-m-d');
     if ($date !== null) {
         $date->setTime(0, 0);

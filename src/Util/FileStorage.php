@@ -26,7 +26,8 @@ class FileStorage
             throw new RuntimeException("Failed to read contents from storage file: {$storageFile}.");
         }
 
-        $deserializedObjects = unserialize($storageContents, ['allowed_classes' => [$class]]);
+        /** @noinspection UnserializeExploitsInspection */
+        $deserializedObjects = unserialize($storageContents);
         if ($deserializedObjects === false) {
             throw new RuntimeException(
                 <<<TEXT
